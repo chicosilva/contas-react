@@ -1,3 +1,4 @@
+import RowConta from './RowConta';
 
 function Contas(props){
 
@@ -7,22 +8,15 @@ function Contas(props){
                 <table class="table table-striped table-sm">
                 <thead>
                     <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
+                        <th>#</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Editar</th>
+                        <th>Remover</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>1,001</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>dolor</td>
-                    <td>sit</td>
-                    </tr>
-                    
+                    <RowConta />
                 </tbody>
                 </table>
             </div>
