@@ -8,7 +8,6 @@ function App() {
   const [contas, setContas] = useState([]);
   
   function addConta(conta) {
-    
     setContas([...contas, conta]);
   }
 

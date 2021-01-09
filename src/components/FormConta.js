@@ -2,22 +2,16 @@ import React, {useState} from "react";
 
 export default props => {
 
-    const [descricao, setDescricao] = useState(props.contaPadrao);
-    const [valor, setValor] = useState("");
+    const [conta, setConta] = useState({descricao: "", valor: "", id: ""});
 
     function handleSubmit(e){
         
         e.preventDefault();
         
-        const conta = {
-            id: Math.floor(Math.random() * 20),
-            valor: valor,
-            descricao: descricao
-        }
-
+        conta.id = Math.floor(Math.random() * 10)
         props.addConta(conta)
-        setDescricao('')
-        setValor('')
+        setConta({descricao: "", valor: "", id: ""})
+        
     }
 
     return (
@@ -25,7 +19,7 @@ export default props => {
             <form onSubmit={handleSubmit}>
 
                 <input className="form-control" 
-                    value={descricao} 
+                    value={conta.descricao} 
                     onChange={e => {
                         
                         e.target.classList.remove('is-invalid');
@@ -33,8 +27,10 @@ export default props => {
                         if(e.target.value == ""){
                             e.target.classList.add('is-invalid');
                         }
-
-                        setDescricao(e.target.value);
+                        
+                        setConta(prevState => {
+                            return {...prevState, descricao: e.target.value}
+                        });
 
                     }} required 
                     placeholder="Descrição"
@@ -42,9 +38,13 @@ export default props => {
 
                 <br />
                 <input
-                    onChange={e => setValor(e.target.value)} 
+                    onChange={e => {
+                        setConta(prevState => {
+                            return {...prevState, valor: e.target.value}
+                        })
+                    }} 
                     className="form-control"
-                    value={valor}
+                    value={conta.valor}
                     type="number"
                     required placeholder="Valor" 
                 />
