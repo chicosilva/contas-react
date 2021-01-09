@@ -1,14 +1,21 @@
 
 function RowConta(props){
-
+    
     return (
         <>
             <tr>
-                <td>1</td>
-                <td>Conta 1</td>
-                <td>R$ 150,00</td>
-                <td></td>
-                <td></td>
+                <td>{props.id}</td>
+                <td>{props.descricao}</td>
+                <td>R$ {props.valor}</td>
+                <td>
+                    <input type="checkbox" />
+                </td>
+                <td>
+                <button className="btn btn-info">Remover</button>
+                </td>
+                <td>
+                    <button className="btn btn-danger">Remover</button>
+                </td>
             </tr>
         </>
     )
