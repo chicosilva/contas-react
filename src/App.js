@@ -1,38 +1,42 @@
 import Titulo from './components/Titulo';
 import Form from './components/FormConta'
+import FormEdicao from './components/FormEdicaoConta'
 import RowConta from './components/RowConta'
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function App() {
   
+  const initialState = {descricao: "", valor: "", id: ""}
   const [contas, setContas] = useState([]);
-  const [objConta, viewConta] = useState({descricao: "", valor: "", id: ""});
-  
+  const [objConta, viewConta] = useState(initialState);
+  const [edicao, setEdicao] = useState(false);
+
   function addConta(conta) {
+    setEdicao(false);
     setContas([...contas, conta]);
   }
 
-  function getConta(conta){
-    
-    viewConta({descricao: "edição", valor: "1", id: "1"});
+  function editRow(conta){
+    setEdicao(true);
+    viewConta(conta);
     
   }
   const listContas = contas.map((conta)=>{
-      return <RowConta 
-          
-          key={conta.id}
-          id={conta.id}
-          descricao={conta.descricao}
-          valor={conta.valor}
-          getConta={getConta}
-          />
+    return <RowConta key={conta.id} editRow={editRow} conta={conta} />
+
   });
 
   return (
     <>
         
       <Titulo titulo="Contas gerais" />
-      <Form addConta={addConta} contas={contas} conta={objConta} />
+      
+      {!edicao? (
+        <Form addConta={addConta} contas={contas} conta={initialState} />
+      ):
+        (<FormEdicao addConta={addConta} conta={objConta} />)
+      }
+      
       <hr />
       <div className="table-responsive">
             <table className="table table-striped table-sm">

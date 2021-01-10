@@ -1,22 +1,27 @@
 import React, {useState, useEffect} from "react";
 
-export default props => {
+export default (props) => {
     
     const [conta, setConta] = useState(props.conta);
+
+    useEffect(() => {
+        
+        setConta(props.conta);
+        
+      }, [props])
     
     function handleSubmit(e){
         
         e.preventDefault();
         
-        conta.id = props.contas.length + 1;
         props.addConta(conta)
         setConta({descricao: "", valor: "", id: ""})
         
     }
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        
+    const { name, value } = e.target;
+    
         e.target.classList.remove('is-invalid');
 
         if(e.target.value == ""){
@@ -24,12 +29,11 @@ export default props => {
         }
 
         setConta({...conta, [name]: value })
-      }
+    }
       
 
     return (
-        <>  
-            <h2>Add</h2>
+        <>  <h2>Editar conta</h2>
             <form onSubmit={handleSubmit}>
 
                 <input className="form-control" 

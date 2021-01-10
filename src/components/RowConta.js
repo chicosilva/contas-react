@@ -1,6 +1,8 @@
 
-function RowConta(conta){
+function RowConta(props){
     
+    const conta = props.conta;
+
     return (
         <>
             <tr>
@@ -11,7 +13,7 @@ function RowConta(conta){
                     <input type="checkbox" />
                 </td>
                 <td>
-                    <button onClick={e => conta.getConta(conta)} className="btn btn-info">Editar</button>
+                    <button onClick={e => props.editRow(conta)} className="btn btn-info">Editar</button>
                 </td>
                 <td>
                     <button className="btn btn-danger">Remover</button>
