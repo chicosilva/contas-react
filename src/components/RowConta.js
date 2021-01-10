@@ -1,17 +1,17 @@
 
-function RowConta(props){
+function RowConta(conta){
     
     return (
         <>
             <tr>
-                <td>{props.id}</td>
-                <td>{props.descricao}</td>
-                <td>R$ {props.valor}</td>
+                <td>{conta.id}</td>
+                <td>{conta.descricao}</td>
+                <td>R$ {conta.valor}</td>
                 <td>
                     <input type="checkbox" />
                 </td>
                 <td>
-                <button className="btn btn-info">Remover</button>
+                    <button onClick={e => conta.getConta(conta)} className="btn btn-info">Editar</button>
                 </td>
                 <td>
                     <button className="btn btn-danger">Remover</button>

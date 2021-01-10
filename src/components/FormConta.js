@@ -1,49 +1,53 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 export default props => {
-
-    const [conta, setConta] = useState({descricao: "", valor: "", id: ""});
+    
+    const [conta, setConta] = useState(props.conta);
+    
+    useEffect(() => {
+        //console.log('sofri alteração')
+    }, [conta])
 
     function handleSubmit(e){
         
         e.preventDefault();
         
-        conta.id = Math.floor(Math.random() * 10)
+        conta.id = props.contas.length + 1;
         props.addConta(conta)
         setConta({descricao: "", valor: "", id: ""})
         
     }
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        
+        e.target.classList.remove('is-invalid');
+
+        if(e.target.value == ""){
+            e.target.classList.add('is-invalid');
+        }
+
+        setConta({...conta, [name]: value })
+      }
+      
 
     return (
         <>  
             <form onSubmit={handleSubmit}>
 
                 <input className="form-control" 
-                    value={conta.descricao} 
-                    onChange={e => {
-                        
-                        e.target.classList.remove('is-invalid');
-
-                        if(e.target.value == ""){
-                            e.target.classList.add('is-invalid');
-                        }
-                        
-                        setConta(prevState => {
-                            return {...prevState, descricao: e.target.value}
-                        });
-
-                    }} required 
+                    value={conta.descricao}
+                    name="descricao"
+                    onChange={handleInputChange}
+                    required 
                     placeholder="Descrição"
                 />
 
                 <br />
                 <input
-                    onChange={e => {
-                        setConta(prevState => {
-                            return {...prevState, valor: e.target.value}
-                        })
-                    }} 
+                    onChange={handleInputChange}
                     className="form-control"
+                    name="valor"
                     value={conta.valor}
                     type="number"
                     required placeholder="Valor" 
